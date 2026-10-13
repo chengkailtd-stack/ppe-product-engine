@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>成楷防护选型助手</title>
+<link rel="icon" href="data:,">
+<meta name="description" content="输入工况，获得个体防护建议、相关国标和成楷示例型号。纯前端、离线可用。">
+<style>
+:root {
+  --brand: #C8102E; --brand-ink: #ffffff; --brand-soft: #fbe9ec;
+  --bg: #f6f6f7; --surface: #ffffff; --ink: #1b1c1f; --muted: #5f636b; --line: #e3e4e8;
+  --green: #1f7a4d; --green-soft: #e6f4ec; --amber: #9a6100; --amber-soft: #fff4dc; --red: #b0101f; --red-soft: #fde8ea;
+  --radius: 12px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --brand: #e0405a; --brand-ink: #ffffff; --brand-soft: #3a1820;
+    --bg: #121316; --surface: #1c1d21; --ink: #ececef; --muted: #a2a6ae; --line: #30323a;
+    --green: #5fd19a; --green-soft: #15291f; --amber: #f2b955; --amber-soft: #2e2512; --red: #ff7a88; --red-soft: #33171b;
+  }
+}
+:root[data-theme="dark"] {
+  --brand: #e0405a; --brand-ink: #ffffff; --brand-soft: #3a1820;
+  --bg: #121316; --surface: #1c1d21; --ink: #ececef; --muted: #a2a6ae; --line: #30323a;
+  --green: #5fd19a; --green-soft: #15291f; --amber: #f2b955; --amber-soft: #2e2512; --red: #ff7a88; --red-soft: #33171b;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.6 -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
+header { background: var(--brand); color: var(--brand-ink); }
+.wrap { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+.top { display: flex; align-items: center; gap: 12px; padding: 18px 0; }
+.logo { font-weight: 800; font-size: 22px; letter-spacing: 2px; border: 2px solid var(--brand-ink); padding: 2px 10px; border-radius: 6px; }
+.top h1 { font-size: 18px; margin: 0; font-weight: 600; }
+.top small { display: block; opacity: .85; font-size: 12px; font-weight: 400; }
+main { padding: 20px 0 40px; }
+.ask { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.ask label { font-weight: 600; display: block; margin-bottom: 8px; }
+.row { display: flex; gap: 8px; }
+textarea { flex: 1; min-height: 64px; resize: vertical; font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+button.go { background: var(--brand); color: var(--brand-ink); border: 0; border-radius: 999px; padding: 0 22px; font: inherit; font-weight: 600; cursor: pointer; min-height: 44px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.chip { background: var(--brand-soft); color: var(--brand); border: 0; border-radius: 999px; padding: 4px 12px; font: inherit; font-size: 13px; cursor: pointer; }
+.result { margin-top: 18px; display: grid; gap: 14px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.card h2 { font-size: 16px; margin: 0 0 10px; }
+.band { display: inline-block; font-weight: 700; border-radius: 999px; padding: 2px 12px; font-size: 13px; margin-right: 8px; }
+.band.GREEN { background: var(--green-soft); color: var(--green); }
+.band.YELLOW { background: var(--amber-soft); color: var(--amber); }
+.band.RED { background: var(--red-soft); color: var(--red); }
+.notice { margin: 8px 0 0; padding-left: 18px; }
+.notice li { margin: 4px 0; }
+.tags span { display: inline-block; font-size: 12px; border: 1px solid var(--line); border-radius: 999px; padding: 1px 10px; margin: 2px 4px 2px 0; color: var(--muted); }
+.ppe { list-style: none; margin: 0; padding: 0; }
+.ppe li { padding: 8px 0; border-top: 1px dashed var(--line); }
+.ppe li:first-child { border-top: 0; }
+.part { font-weight: 600; color: var(--brand); margin-right: 6px; }
+.std { color: var(--muted); font-size: 13px; }
+.products { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.prod { border: 1px solid var(--line); border-radius: 10px; padding: 14px; display: flex; flex-direction: column; gap: 6px; background: var(--surface); }
+.prod .model { font-weight: 800; color: var(--brand); font-size: 17px; letter-spacing: .5px; }
+.prod .name { font-weight: 600; }
+.prod ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
+.prod .links { margin-top: auto; display: flex; gap: 8px; padding-top: 6px; flex-wrap: wrap; }
+.prod a { text-decoration: none; font-size: 13px; font-weight: 600; border-radius: 999px; padding: 4px 12px; border: 1px solid var(--brand); color: var(--brand); }
+.prod a.primary { background: var(--brand); color: var(--brand-ink); }
+.muted { color: var(--muted); font-size: 13px; }
+footer { border-top: 1px solid var(--line); padding: 18px 0 30px; color: var(--muted); font-size: 12px; }
+@media (max-width: 560px) { .row { flex-direction: column; } button.go { width: 100%; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap top">
+    <div class="logo">成楷</div>
+    <h1>PPE 防护选型助手<small>说出你的工况，给出防护建议、相关国标和成楷示例型号</small></h1>
+  </div>
+</header>
+<main class="wrap">
+  <section class="ask">
+    <label for="q">你的工况或问题</label>
+    <div class="row">
+      <textarea id="q" placeholder="例如：家具厂喷漆车间，工人每天喷 4 小时，该戴什么？"></textarea>
+      <button class="go" id="go">给建议</button>
+    </div>
+    <div class="chips" id="chips"></div>
+  </section>
+  <section class="result" id="out" aria-live="polite"></section>
+</main>
+<footer class="wrap">
+  产品数据仅供参考，以实物和检测报告为准；价格与库存请以店铺页面为准。高风险作业（受限空间、带电、高处等）请由专业人员现场评估。
+  <br>© 北京成楷恒业科技有限公司 · 开源许可 Apache-2.0
+</footer>
+<script src="data.js"></script>
+<script src="core.js"></script>
+<script>
+(function () {
+  var D = window.CKPPE_DATA, E = window.CKPPE;
+  var examples = ['电焊工全套劳保怎么配', '喷漆车间工人戴什么防护', '打磨不锈钢粉尘大', '搬玻璃用什么手套防割手', '车间噪音大用耳塞还是耳罩', '普通运动鞋能当安全鞋用吗', '下化粪池清淤戴什么口罩'];
+  var chips = document.getElementById('chips');
+  examples.forEach(function (t) {
+    var b = document.createElement('button'); b.className = 'chip'; b.textContent = t;
+    b.onclick = function () { document.getElementById('q').value = t; run(); };
+    chips.appendChild(b);
+  });
+  var BAND = { GREEN: '可给建议', YELLOW: '需补充信息', RED: '安全红线' };
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function run() {
+    var q = document.getElementById('q').value.trim();
+    var out = document.getElementById('out');
+    if (!q) { out.innerHTML = ''; return; }
+    var r = E.recommend(D, q);
+    var h = '';
+    h += '<div class="card"><span class="band ' + r.band + '">' + BAND[r.band] + '</span>';
+    if (r.hazards.length) h += '<span class="tags">' + r.hazards.map(function (x) { return '<span>' + esc(x.name) + '</span>'; }).join('') + '</span>';
+    if (r.notices.length) h += '<ul class="notice">' + r.notices.map(function (n) { return '<li>' + esc(n) + '</li>'; }).join('') + '</ul>';
+    else if (!r.scenarios.length && !r.products.length) h += '<p class="muted">没有识别出具体工况，请描述行业、岗位和接触的危害。</p>';
+    h += '</div>';
+    if (r.scenarios.length) {
+      var s = r.scenarios[0];
+      h += '<div class="card"><h2>参考场景：' + esc(s.industry) + ' / ' + esc(s.job) + '</h2><ul class="ppe">' +
+        s.ppe.map(function (p) { return '<li><span class="part">' + esc(p.part) + '</span>' + esc(p.need) + (p.standard ? ' <span class="std">（' + esc(p.standard) + '）</span>' : '') + '</li>'; }).join('') +
+        '</ul>' + (s.mistakes && s.mistakes.length ? '<p class="muted">常见错误：' + s.mistakes.slice(0, 4).map(esc).join('；') + '</p>' : '') +
+        '<p class="muted">场景知识已经成楷负责人审阅，仅供选型参考，不替代现场评估。</p></div>';
+    }
+    if (r.products.length) {
+      h += '<div class="card"><h2>成楷示例型号</h2><div class="products">' + r.products.map(function (p) {
+        return '<div class="prod"><div class="model">' + esc(p.model) + '</div><div class="name">' + esc(p.name) + '</div>' +
+          '<div class="tags"><span>' + esc(p.category) + '</span></div>' +
+          '<ul>' + p.key_params.map(function (k) { return '<li>' + esc(k) + '</li>'; }).join('') + '</ul>' +
+          '<div class="muted">适用：' + p.scenes.map(esc).join('、') + '</div>' +
+          '<div class="std">标准：' + esc(p.standard) + '（' + esc(p.standard_note) + '）</div>' +
+          '<div class="links">' + (p.links.tmall ? '<a class="primary" target="_blank" rel="noopener" href="' + esc(p.links.tmall) + '">天猫店铺查看</a>' : '') +
+          (p.links.jd ? '<a target="_blank" rel="noopener" href="' + esc(p.links.jd) + '">京东</a>' : '') + '</div></div>';
+      }).join('') + '</div></div>';
+    }
+    if (r.standards.length) {
+      h += '<div class="card"><h2>相关国标</h2><ul class="ppe">' + r.standards.map(function (s) {
+        return '<li><b>' + esc(s.code) + '</b> ' + esc(s.name) + '<div class="std">' + esc(s.points.join('；')) + (s.note ? '（' + esc(s.note) + '）' : '') + '</div></li>';
+      }).join('') + '</ul></div>';
+    }
+    out.innerHTML = h;
+  }
+  document.getElementById('go').onclick = run;
+  document.getElementById('q').addEventListener('keydown', function (e) { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) run(); });
+})();
+</script>
+</body>
+</html>

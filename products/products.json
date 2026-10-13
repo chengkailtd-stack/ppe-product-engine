@@ -1,0 +1,734 @@
+{
+ "_说明": "成楷在售品中挑选的示例型号，仅供选型参考，产品数据以实物和检测报告为准；价格、库存请以店铺页面为准。",
+ "version": "0.1.0",
+ "brand": "成楷",
+ "products": [
+  {
+   "model": "CKH-0303",
+   "name": "软硅胶防毒半面具（双滤盒）",
+   "category": "呼吸防护",
+   "hazards": [
+    "organic_vapor",
+    "dust"
+   ],
+   "scenes": [
+    "喷漆、涂装",
+    "印刷、胶水等有机溶剂蒸气",
+    "农药喷洒",
+    "实验室低浓度防护"
+   ],
+   "key_params": [
+    "硅胶面体",
+    "双滤盒接口",
+    "需按气体种类配对应滤毒盒；配滤棉可防颗粒物"
+   ],
+   "standard": "GB 2890-2022",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=18130762307",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKH-1009",
+   "name": "防毒半面具（单滤盒）",
+   "category": "呼吸防护",
+   "hazards": [
+    "organic_vapor"
+   ],
+   "scenes": [
+    "短时间喷漆",
+    "低浓度有机蒸气",
+    "偶尔的农药喷洒"
+   ],
+   "key_params": [
+    "单滤盒接口",
+    "适合短时间、低浓度作业",
+    "需按气体种类配对应滤毒盒"
+   ],
+   "standard": "GB 2890-2022",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=665884960436",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKH-402",
+   "name": "硅胶防毒防尘半面具（双滤盒）",
+   "category": "呼吸防护",
+   "hazards": [
+    "organic_vapor",
+    "dust"
+   ],
+   "scenes": [
+    "喷漆、油漆",
+    "化工车间低浓度气体",
+    "甲醛异味环境"
+   ],
+   "key_params": [
+    "硅胶面体",
+    "双滤盒接口",
+    "可配滤毒盒或滤棉"
+   ],
+   "standard": "GB 2890-2022",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=539888252507",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKH-9500B",
+   "name": "硅胶防尘半面具（可换滤棉）",
+   "category": "呼吸防护",
+   "hazards": [
+    "dust",
+    "weld_fume"
+   ],
+   "scenes": [
+    "打磨、切割",
+    "木工",
+    "装修开槽",
+    "水泥、石材粉尘"
+   ],
+   "key_params": [
+    "硅胶面体",
+    "可更换滤棉，重复使用",
+    "过滤等级以所配滤棉为准",
+    "只防颗粒物，不防有毒气体"
+   ],
+   "standard": "GB 2626-2019",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=36009725804",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKH-5720CV",
+   "name": "头戴式活性炭防尘口罩（单呼吸阀）",
+   "category": "呼吸防护",
+   "hazards": [
+    "dust",
+    "weld_fume"
+   ],
+   "scenes": [
+    "焊接烟尘",
+    "打磨粉尘",
+    "轻微异味环境"
+   ],
+   "key_params": [
+    "头戴式",
+    "带呼吸阀",
+    "含活性炭层，可减轻异味，但不能替代防毒面具"
+   ],
+   "standard": "GB 2626-2019",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=9244749962",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKY-134",
+   "name": "全封闭防护眼罩",
+   "category": "眼部防护",
+   "hazards": [
+    "impact",
+    "dust",
+    "wind_sand",
+    "splash"
+   ],
+   "scenes": [
+    "打磨、切割飞屑",
+    "粉尘环境",
+    "户外防风沙"
+   ],
+   "key_params": [
+    "全封闭眼罩",
+    "可戴在近视镜外（以实物为准）"
+   ],
+   "standard": "GB 14866-2023",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=39234073547",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKY-135FW",
+   "name": "全透明防护眼罩（防雾）",
+   "category": "眼部防护",
+   "hazards": [
+    "impact",
+    "dust",
+    "splash",
+    "wind_sand"
+   ],
+   "scenes": [
+    "工业打磨",
+    "防飞溅",
+    "防风沙"
+   ],
+   "key_params": [
+    "全透明镜片",
+    "防雾处理"
+   ],
+   "standard": "GB 14866-2023",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=23794588258",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKY-136FW",
+   "name": "防护眼罩（防雾）",
+   "category": "眼部防护",
+   "hazards": [
+    "impact",
+    "dust",
+    "wind_sand"
+   ],
+   "scenes": [
+    "打磨作业",
+    "骑行防风沙",
+    "粉尘环境"
+   ],
+   "key_params": [
+    "防雾处理",
+    "包围式设计"
+   ],
+   "standard": "GB 14866-2023",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=23750308605",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKY-2063",
+   "name": "透明防护眼镜",
+   "category": "眼部防护",
+   "hazards": [
+    "impact",
+    "splash"
+   ],
+   "scenes": [
+    "机加工飞屑",
+    "一般防飞溅",
+    "实验室"
+   ],
+   "key_params": [
+    "平光透明镜片",
+    "眼镜式，轻便"
+   ],
+   "standard": "GB 14866-2023",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=24662748211",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKY-2097FW",
+   "name": "防护眼镜（防雾）",
+   "category": "眼部防护",
+   "hazards": [
+    "impact",
+    "wind_sand"
+   ],
+   "scenes": [
+    "户外骑行防风沙",
+    "一般防飞屑"
+   ],
+   "key_params": [
+    "防雾处理",
+    "透明镜片"
+   ],
+   "standard": "GB 14866-2023",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=12721736665",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKY-2103",
+   "name": "透明防护眼镜",
+   "category": "眼部防护",
+   "hazards": [
+    "impact",
+    "dust",
+    "splash"
+   ],
+   "scenes": [
+    "车间通用防护",
+    "防风沙防尘",
+    "防飞沫"
+   ],
+   "key_params": [
+    "平光透明镜片",
+    "眼镜式，轻便"
+   ],
+   "standard": "GB 14866-2023",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=21850740443",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKY-EF21",
+   "name": "防护护目镜",
+   "category": "眼部防护",
+   "hazards": [
+    "impact",
+    "dust",
+    "wind_sand"
+   ],
+   "scenes": [
+    "工业粉尘",
+    "骑行防风沙",
+    "一般防飞屑"
+   ],
+   "key_params": [
+    "包围式护目镜",
+    "防雾处理"
+   ],
+   "standard": "GB 14866-2023",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=43787053976",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKY-2009",
+   "name": "防雾防飞溅护目镜",
+   "category": "眼部防护",
+   "hazards": [
+    "splash",
+    "impact",
+    "dust"
+   ],
+   "scenes": [
+    "化学实验室防飞溅",
+    "防尘防飞沫",
+    "打磨"
+   ],
+   "key_params": [
+    "防雾处理",
+    "可罩戴近视眼镜（以实物为准）"
+   ],
+   "standard": "GB 14866-2023",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=9253253778",
+    "jd": "https://item.jd.com/100010712112.html"
+   }
+  },
+  {
+   "model": "CKL-3116",
+   "name": "头戴式电焊面罩",
+   "category": "焊接防护",
+   "hazards": [
+    "welding_arc",
+    "welding_spatter"
+   ],
+   "scenes": [
+    "电焊",
+    "氩弧焊",
+    "气保焊"
+   ],
+   "key_params": [
+    "头戴式，解放双手",
+    "遮光号/变光参数以商品页和检测报告为准"
+   ],
+   "standard": "GB 3609.1-2025",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=18418359312",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKL-3121",
+   "name": "自动变光电焊面罩（透气款）",
+   "category": "焊接防护",
+   "hazards": [
+    "welding_arc",
+    "welding_spatter"
+   ],
+   "scenes": [
+    "夏季电焊",
+    "氩弧焊",
+    "气保焊"
+   ],
+   "key_params": [
+    "自动变光",
+    "头戴式，透气设计",
+    "遮光号范围以商品页和检测报告为准"
+   ],
+   "standard": "GB 3609.1-2025",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=590850614998",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKL-3125",
+   "name": "自动变光电焊面罩（全脸头戴式）",
+   "category": "焊接防护",
+   "hazards": [
+    "welding_arc",
+    "welding_spatter"
+   ],
+   "scenes": [
+    "电焊",
+    "氩弧焊",
+    "焊接全脸防护"
+   ],
+   "key_params": [
+    "自动变光",
+    "全脸头戴式",
+    "遮光号范围以商品页和检测报告为准"
+   ],
+   "standard": "GB 3609.1-2025",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=1087775492945",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKB-2112",
+   "name": "加长牛皮电焊手套",
+   "category": "焊接防护",
+   "hazards": [
+    "welding_spatter",
+    "heat"
+   ],
+   "scenes": [
+    "电焊",
+    "氩弧焊",
+    "气焊"
+   ],
+   "key_params": [
+    "牛皮材质",
+    "加长护腕",
+    "防飞溅、耐磨"
+   ],
+   "standard": "按相关国家标准",
+   "standard_note": "具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=43707244586",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKB-3001",
+   "name": "牛皮焊工披肩面罩",
+   "category": "焊接防护",
+   "hazards": [
+    "welding_spatter"
+   ],
+   "scenes": [
+    "电焊防烫",
+    "仰焊、立焊防熔渣"
+   ],
+   "key_params": [
+    "牛皮材质",
+    "披肩式，护头颈",
+    "需配合焊接滤光镜片使用"
+   ],
+   "standard": "按相关国家标准",
+   "standard_note": "具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=43706052302",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKB-9119",
+   "name": "牛皮电焊套袖",
+   "category": "焊接防护",
+   "hazards": [
+    "welding_spatter"
+   ],
+   "scenes": [
+    "电焊护臂",
+    "防熔渣烫伤"
+   ],
+   "key_params": [
+    "牛皮材质",
+    "加长款"
+   ],
+   "standard": "按相关国家标准",
+   "standard_note": "具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=43685386727",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKB-6650",
+   "name": "牛皮电焊护膝",
+   "category": "焊接防护",
+   "hazards": [
+    "welding_spatter"
+   ],
+   "scenes": [
+    "跪姿焊接",
+    "氩弧焊、气保焊"
+   ],
+   "key_params": [
+    "牛皮外层",
+    "海绵内衬"
+   ],
+   "standard": "按相关国家标准",
+   "standard_note": "具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=543259641007",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKS-AA15-36",
+   "name": "耐高温隔热手套（加长）",
+   "category": "手部防护",
+   "hazards": [
+    "heat"
+   ],
+   "scenes": [
+    "烘焙烤箱",
+    "工业高温工件取放",
+    "热处理"
+   ],
+   "key_params": [
+    "加长加厚",
+    "耐温等级以产品标识为准（商品页标称约500℃级）"
+   ],
+   "standard": "GB 38306-2025",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=605206493041",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKS-VC15",
+   "name": "加长防水防蒸汽隔热手套",
+   "category": "手部防护",
+   "hazards": [
+    "heat"
+   ],
+   "scenes": [
+    "蒸汽环境",
+    "热水作业",
+    "后厨高温"
+   ],
+   "key_params": [
+    "约60cm加长",
+    "PVC防水外层",
+    "耐温等级以产品标识为准"
+   ],
+   "standard": "GB 38306-2025",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=592498152248",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKS-CUTRE-PU",
+   "name": "全浸胶防切割手套",
+   "category": "手部防护",
+   "hazards": [
+    "cut"
+   ],
+   "scenes": [
+    "玻璃、钣金搬运",
+    "水产加工",
+    "锐边零件"
+   ],
+   "key_params": [
+    "防切割内胆",
+    "全浸胶，防水防滑",
+    "防切割等级以产品标识为准"
+   ],
+   "standard": "GB 24541-2022",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=624747484413",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKS-CUTRE-DS",
+   "name": "点塑防切割手套",
+   "category": "手部防护",
+   "hazards": [
+    "cut"
+   ],
+   "scenes": [
+    "锐边零件装配",
+    "仓储搬运",
+    "金属件分拣"
+   ],
+   "key_params": [
+    "防切割内胆",
+    "掌面点塑防滑，透气",
+    "防切割等级以产品标识为准"
+   ],
+   "standard": "GB 24541-2022",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=625351530643",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKT-NTB-1",
+   "name": "ABS双色安全帽",
+   "category": "头部防护",
+   "hazards": [
+    "falling_object"
+   ],
+   "scenes": [
+    "建筑工地",
+    "工厂车间",
+    "电力巡检（非带电作业）"
+   ],
+   "key_params": [
+    "ABS帽壳",
+    "可印字"
+   ],
+   "standard": "GB 2811-2019",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=18779889325",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKT-A2",
+   "name": "ABS安全帽（玻璃钢造型）",
+   "category": "头部防护",
+   "hazards": [
+    "falling_object"
+   ],
+   "scenes": [
+    "建筑施工",
+    "工程监理",
+    "工厂车间"
+   ],
+   "key_params": [
+    "ABS帽壳",
+    "玻璃钢造型",
+    "可印字"
+   ],
+   "standard": "GB 2811-2019",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=649002032490",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKT-NTA-A3",
+   "name": "带护目镜安全帽",
+   "category": "头部防护",
+   "hazards": [
+    "falling_object",
+    "impact",
+    "dust"
+   ],
+   "scenes": [
+    "工地施工",
+    "需同时护眼的作业",
+    "救援"
+   ],
+   "key_params": [
+    "ABS帽壳",
+    "自带护目镜"
+   ],
+   "standard": "GB 2811-2019",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=674313336921",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKT-6690",
+   "name": "阻燃披肩焊工帽",
+   "category": "头部防护",
+   "hazards": [
+    "welding_spatter"
+   ],
+   "scenes": [
+    "电焊防焊渣",
+    "防尘"
+   ],
+   "key_params": [
+    "阻燃面料",
+    "披肩式护颈",
+    "不是安全帽，不能防砸"
+   ],
+   "standard": "按相关国家标准",
+   "standard_note": "具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=543599901579",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKE-2047BU",
+   "name": "耳塞分配器（250副装）",
+   "category": "听力防护",
+   "hazards": [
+    "noise"
+   ],
+   "scenes": [
+    "工厂车间集中发放",
+    "冲压、空压机等噪声岗位"
+   ],
+   "key_params": [
+    "分配器套装",
+    "一次性泡棉耳塞",
+    "降噪值以包装标识为准"
+   ],
+   "standard": "GB 23466-2025",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=679035383916",
+    "jd": ""
+   }
+  },
+  {
+   "model": "CKE-2067",
+   "name": "壁挂式耳塞分配器（250副装）",
+   "category": "听力防护",
+   "hazards": [
+    "noise"
+   ],
+   "scenes": [
+    "车间入口壁挂发放",
+    "噪声岗位"
+   ],
+   "key_params": [
+    "壁挂式",
+    "降噪值以包装标识为准"
+   ],
+   "standard": "GB 23466-2025",
+   "standard_note": "品类参考标准，具体以产品检测报告为准",
+   "links": {
+    "tmall": "https://detail.tmall.com/item.htm?id=852402449722",
+    "jd": ""
+   }
+  }
+ ]
+}

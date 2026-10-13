@@ -1,0 +1,22 @@
+{
+  "name": "@chengkai/ppe-engine",
+  "version": "0.1.0",
+  "description": "成楷 PPE 产品智能引擎：工况→防护建议→成楷型号，含型号硬校验与红线规则",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./core": "./src/core.js"
+  },
+  "bin": {
+    "ckppe": "bin/ckppe.js"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "eval": "node ../eval/run.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "Apache-2.0"
+}
