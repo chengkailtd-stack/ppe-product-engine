@@ -278,14 +278,16 @@ function stdNounCategories(text) {
 /**
  * 校验一段回答：
  *  - 回答中出现的每个 CK 型号必须在产品表里（防止大模型编型号）
- *  - 型号前缀必须与产品品类自洽，且与其前文描述的品类自洽（防止“防毒面具 CKB-702”）
+ *  - 传了 opts.allowed（本次推荐的候选型号）时，集合外型号一律拒绝；空集合时出现任何型号都拒绝
+ *  - 型号与其前后就近描述的品类必须自洽（前后分句、跨逗号；以“它/这款”开头的下一句也算），防止“CKB-2112 是防毒面具”
  *  - 不得含广告法绝对化用语、价格、认证编号、贬损其他品牌
  * @returns {{ok: boolean, models: string[], errors: Array<{code: string, model?: string, message: string}>}}
  */
-export function validateAnswer(data, answer) {
-  const text = String(answer || '');
+export function validateAnswer(data, answer, opts = {}) {
+  const text = String(answer || '').replace(/\[\[|\]\]/g, ' ');
   const idx = productIndex(data);
   const prefixRules = data.rules.prefix;
+  const allowed = Array.isArray(opts.allowed) ? new Set(opts.allowed.map((m) => String(m).toUpperCase())) : null;
   const errors = [];
   const models = extractModels(text);
   for (const m of models) {
@@ -300,12 +302,14 @@ export function validateAnswer(data, answer) {
     } else if (!prefixAllows(prefixRules, m, p.category)) {
       errors.push({ code: 'PREFIX_CATEGORY_MISMATCH', model: m, message: `${m} 的前缀与其品类「${p.category}」不符` });
     }
-    // 前文语境：同一分句里型号前面的描述
-    const re = new RegExp(`([^。；;\\n，,]{0,16})${m.replace(/[-]/g, '\\-')}`, 'gi');
-    for (const mm of text.matchAll(re)) {
-      const ctxCats = detectCategories(prefixRules, mm[1]);
-      if (ctxCats.length && !ctxCats.some((c) => prefixRules.prefixes[pre].allowed_categories.includes(c))) {
-        errors.push({ code: 'PREFIX_CONTEXT_MISMATCH', model: m, message: `「${mm[1].trim()}」描述的是${ctxCats.join('/')}，但 ${pre} 前缀属于${prefixRules.prefixes[pre].name}` });
+    if (allowed && !allowed.has(m)) {
+      errors.push({ code: 'NOT_CANDIDATE', model: m, message: `${m} 不在本次推荐的候选型号中` });
+    }
+    const okCats = new Set([...prefixRules.prefixes[pre].allowed_categories, ...(p ? [p.category, ...detectCategories(prefixRules, p.name)] : [])]);
+    for (const ctx of modelContexts(text, m, (s) => detectCategories(prefixRules, s).length > 0)) {
+      const bad = detectCategories(prefixRules, ctx).filter((c) => !okCats.has(c));
+      if (bad.length) {
+        errors.push({ code: 'PREFIX_CONTEXT_MISMATCH', model: m, message: `${m} 附近的描述指向${bad.join('/')}，与该型号品类不符` });
         break;
       }
     }
@@ -315,6 +319,47 @@ export function validateAnswer(data, answer) {
     if (hit) errors.push({ code: r.id, message: `${r.message}：「${hit[0]}」` });
   }
   return { ok: errors.length === 0, models, errors };
+}
+
+/** 取型号每次出现处的就近描述：本分句里型号前后（到相邻型号为止）；若某侧没有品类词，再向该侧扩一个不含其他型号的分句；下一句以“它/这款/该款…”开头时并入 */
+function modelContexts(text, model, hasCat) {
+  const out = [];
+  const sentences = text.split(/(?<=[。！？!?\n])/);
+  const hasModel = (s) => extractModels(s).length > 0;
+  sentences.forEach((sent, si) => {
+    const clauses = sent.split(/(?<=[，,；;：:、])/);
+    clauses.forEach((cl, ci) => {
+      const ms = [...cl.matchAll(MODEL_RE)];
+      ms.forEach((mm, k) => {
+        if (mm[0].toUpperCase().replace(/-+$/, '') !== model) return;
+        const start = k > 0 ? ms[k - 1].index + ms[k - 1][0].length : 0;
+        const end = k < ms.length - 1 ? ms[k + 1].index : cl.length;
+        let before = cl.slice(start, mm.index);
+        let after = cl.slice(mm.index + mm[0].length, end);
+        if (k === 0 && ci > 0 && !hasCat(before) && !hasModel(clauses[ci - 1])) before = clauses[ci - 1] + before;
+        if (k === ms.length - 1 && !hasCat(after)) {
+          if (ci < clauses.length - 1 && !hasModel(clauses[ci + 1])) after += clauses[ci + 1];
+          else if (ci === clauses.length - 1 && si < sentences.length - 1 && /^\s*(它|这款|这个|该款|该型号|此款|这一款)/.test(sentences[si + 1]) && !hasModel(sentences[si + 1])) after += sentences[si + 1];
+        }
+        out.push(before + ' ' + after);
+      });
+    });
+  });
+  return out;
+}
+
+/** 把回答里的 [[型号]] 占位按产品表的权威品名和品类渲染（品名不交给大模型写） */
+export function renderModelRefs(data, answer) {
+  const idx = productIndex(data);
+  return String(answer || '').replace(/\[\[\s*(CK[A-Z]-[0-9A-Z][0-9A-Z-]*)\s*\]\]/gi, (all, id) => {
+    const p = idx.get(id.toUpperCase());
+    return p ? `${p.model}（${p.name}，${p.category}）` : all;
+  });
+}
+
+/** 安全回退：大模型回答未通过校验时，改用规则引擎结果，不展示被拒原文 */
+export function fallbackAnswer(rec) {
+  return `（大模型回答未通过型号/合规校验，已改为规则引擎给出的建议。）\n\n${renderAnswer(rec)}`;
 }
 
 /** 把校验不过的型号替换成占位，避免错误型号流到用户面前 */
@@ -354,7 +399,7 @@ export function buildMessages(data, question, rec) {
   const system = [
     '你是成楷（劳保防护用品品牌）的 PPE 选型顾问，回答要专业、口语、简洁（200 字以内）。',
     '规则：',
-    '1. 只能推荐“候选型号”里的成楷型号，原样写型号，不得编造或改写型号；候选为空就只讲防护类型，不提型号。',
+    '1. 只能推荐“候选型号”里的成楷型号，并且只写成 [[型号]] 的形式（如 [[CKH-0303]]），不要自己写品名或品类，程序会按产品表补全；不得编造或改写型号；候选为空就只讲防护类型，不提任何型号。',
     '2. 不报价格、库存、发货时效，不编造检测报告或证书编号。',
     '3. 不用“最好/第一/100%/绝对/万能”等绝对化用语；不评价、不贬损其他品牌。',
     '4. 缺氧、受限空间、带电作业、高处坠落等高风险情况，必须提醒找专业人员现场评估。',

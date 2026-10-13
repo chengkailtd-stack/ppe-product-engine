@@ -138,3 +138,10 @@ test('国标检索精筛：手套按危害给对口标准，不整类列出', ()
   // 型号查询只列该型号自身标准
   assert.deepEqual(recommend(data, 'CKS-CUTRE-PU 执行什么标准').standards.map((s) => s.code), ['GB 24541-2022']);
 });
+
+test('型号就近语境：多型号并列不误判，后置描述不符被拦', () => {
+  assert.equal(validateAnswer(data, '喷漆戴防毒面具 CKH-0303，眼睛配护目镜 CKY-134。').ok, true);
+  assert.equal(validateAnswer(data, '防毒面具选 CKH-0303，护目镜选 CKY-134，以检测报告为准。').ok, true);
+  assert.ok(validateAnswer(data, 'CKY-134，这是防毒面具。').errors.some((e) => e.code === 'PREFIX_CONTEXT_MISMATCH'));
+  assert.ok(validateAnswer(data, '推荐 CKH-0303', { allowed: [] }).errors.some((e) => e.code === 'NOT_CANDIDATE'));
+});

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-// 命令行：node engine/bin/ckppe.js "喷漆车间戴什么防护" [--llm] [--provider qwen|deepseek] [--json]
+// 命令行：node engine/bin/ckppe.js "喷漆车间戴什么防护" [--llm] [--provider qwen|deepseek] [--json] [--debug]
+// --debug 才会显示大模型原文和校验细节（含被拒内容），默认只显示安全回答和错误代码
 import { createEngine } from '../src/index.js';
 
 const args = process.argv.slice(2);
@@ -10,18 +11,19 @@ const opt = (name) => {
 };
 const question = args.filter((a, i) => !a.startsWith('--') && args[i - 1] !== '--provider').join(' ');
 if (!question) {
-  console.log('用法：ckppe "你的工况或问题" [--llm] [--provider qwen|deepseek] [--json]');
+  console.log('用法：ckppe "你的工况或问题" [--llm] [--provider qwen|deepseek] [--json] [--debug]');
   process.exit(1);
 }
 const engine = createEngine();
 const llm = flag('--llm') ? { provider: opt('--provider') } : undefined;
 try {
-  const r = await engine.ask(question, { llm });
+  const r = await engine.ask(question, { llm, debug: flag('--debug') });
   if (flag('--json')) console.log(JSON.stringify({ ...r, recommendation: { ...r.recommendation, scenarios: r.recommendation.scenarios.length } }, null, 2));
   else {
     console.log(`[${r.recommendation.band}] 意图：${r.recommendation.intent}  来源：${r.source}\n`);
     console.log(r.answer);
-    if (!r.validation.ok) console.log('\n校验问题：', r.validation.errors.map((e) => e.message).join('；'));
+    if (!r.validation.ok) console.log('\n校验未通过（代码）：', r.validation.errors.map((e) => (e.model ? `${e.code}:${e.model}` : e.code)).join('，'));
+    if (r.debug) console.log('\n[debug] 大模型原文：\n' + r.debug.raw + '\n[debug] 校验细节：', r.debug.validation.errors.map((e) => e.message).join('；'));
   }
 } catch (e) {
   console.error('出错：', e.message);

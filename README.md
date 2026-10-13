@@ -62,8 +62,8 @@ node engine/bin/ckppe.js "电焊工全套劳保怎么配" --llm --provider deeps
 # 其他 OpenAI 兼容接口
 export CKPPE_BASE_URL=https://your-endpoint/v1 CKPPE_MODEL=your-model CKPPE_API_KEY=...
 
-# 测试与评测
-cd engine && npm test
+# 测试与评测（均在仓库根目录执行）
+npm --prefix engine test
 node eval/run.mjs            # 离线评测
 node eval/run.mjs --llm      # 评测大模型回答
 ```
@@ -80,6 +80,8 @@ console.log(v.errors);   // PREFIX_CONTEXT_MISMATCH / UNKNOWN_MODEL ...
 ```
 
 本仓库**不内置、不保存任何 API Key**，Key 只从你的环境变量或参数读取。
+
+大模型回答必须通过校验（型号在产品表且属于本次候选、型号与就近描述品类一致、无价格/绝对化用语/编造报告编号等）才会展示；不通过时改为规则引擎的确定性回答，被拒原文不展示，只有 `--debug`（代码里 `ask(q, { debug: true })`）才返回原文和校验细节。
 
 ## 网页 Demo
 
